@@ -115,5 +115,5 @@ Use `names()` (or tidyverse solution with `rename_all`)
 ```{r}
 names(GeoB8323_1) <- gsub(..., x = names(GeoB8323_1))
 ```
-replace the ... with your code
+replace the ... with your code. Watch out for special characters!
 
