@@ -1,0 +1,119 @@
+---
+title: "Regular expressions for strings"
+author: "Richard J. Telford"
+date: "September 29, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Strings
+
+We might want to 
+
+- search a character vector for strings with a certain pattern
+- replace a pattern
+- extract a pattern
+
+Regular expressions can help with these
+
+Use base R or `stringr` package
+
+## Detecting a pattern
+
+Very useful inside `dplyr::filter`
+```{r}
+a <- c("palaeoecology", "paleoecology", "Palaeoenvironment")
+grepl(pattern = "palaeo", x = a, ignore.case = TRUE)
+
+#or use stringr package
+stringr::str_detect(string = a, pattern = "palaeo")#no case option
+```
+
+## Replacing a pattern
+
+Very useful with `dplyr::mutate` for cleaning data
+```{r}
+a <- c("palaeoecology", "paleoecology", "Palaeoenvironment")
+gsub(pattern = "paleo", replacement = "palaeo", x = a, ignore.case = TRUE)
+
+#or use stringr package
+stringr::str_replace_all(string = a, 
+                         pattern = "paleo", 
+                         replacement = "palaeo")
+```
+
+## Extracting a pattern
+
+```{r}
+a <- c("palaeoecology", "paleoecology", "Palaeoenvironment")
+
+
+# stringr package
+stringr::str_extract(string = a, pattern = "[pP]ala?eo")
+```
+
+## Regular expressions{.smaller}
+
+- `.` any character
+- `\\.` an actual dot. The `\\` escape the `.`
+- `[a-zA-Z]` any letter upper or lower case
+- `\\d` a number
+
+### Anchors
+
+- `^`The start of the string
+- `$` The end of the string
+
+### Number
+- `a?` maybe one "a"
+- `a+` at least one "a"
+- `a*` zero or more "a"
+- `a{3, 5}` three - five "a"
+
+
+## Example
+
+Exacting the core name from the file name
+```{r}
+path <- "data/GeoB8323-2_pollen_analysis.tab"
+stringr::str_extract(path, "GeoB\\d{4}-\\d")
+```
+## RVerbalExpressions
+
+Makes writing complex regular expressions easy.
+
+New package  - not yet on CRAN
+```{r}
+devtools::install_github("VerbalExpressions/RVerbalExpressions")
+```
+
+```{r}
+library("RVerbalExpressions")
+expr <- rx() %>% 
+  rx_find("GeoB") %>% 
+  rx_digit() %>% 
+  rx_multiple(min = 4, max = 4) %>% 
+  rx_find("-") %>% 
+  rx_digit()
+expr
+
+stringr::str_extract(path, expr)
+
+```
+
+## Task
+
+The column names on `GeoB8323_1` are awkward
+
+Remove " [#/cm**3]" and " [#]" from the column names with one regular expression
+
+Use `names()` (or tidyverse solution with `rename_all`)
+
+```{r}
+names(GeoB8323_1) <- gsub(..., x = names(GeoB8323_1))
+```
+replace the ... with your code
+
