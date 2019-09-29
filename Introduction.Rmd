@@ -1,0 +1,49 @@
+---
+title: "Reproducible and Open Science for Palaeoecology with R"
+author: "Richard J. Telford"
+date: "September 29, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Ingredients
+
+* Reproducible science
+* Open science
+* Methods for reproducible data analysis
+* Quantitiative methods for palaeoecology
+
+## Methods for reproducible data analysis
+
+* R and Rstudio
+* git and GitHub
+* Coding style
+* Importing data
+* `tidyverse` for data management
+* `ggplot2` for plots
+* Strings with regular expressions
+* Dates with `lubridate`
+* Debugging code
+* Rmarkdown for reproducible manuscripts
+
+## Quantitiative methods for palaeoecology
+
+* Age-depth modelling
+* Ordinations
+* (Constrained) cluster analysis
+* Transfer functions and diagnostics
+* Diversity, rates of change
+* Trend detection
+
+
+
+
+
+
+
+
+
+
