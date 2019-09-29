@@ -1,0 +1,43 @@
+---
+title: "Pipes"
+author: "Richard J. Telford"
+date: "September 29, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pipes
+
+Pipes are commonly used with `tidyverse` but can be used with any function.
+
+```{r, eval = FALSE}
+iris %>% group_by(Species) %>% 
+  filter(Sepal.Length > 5)
+
+filter(group_by(iris, Species), Sepal.Length > 5)
+```
+
+Never need to use pipes, but can make code more readable
+
+Most useful pipe is `%>%` (Rstudio shortcut ctrl-shift-m)
+
+Passes result of code on left of pipe to function on right
+
+Other pipes in the `magrittr` package
+
+## Mashed potato
+
+```{r potato, eval = FALSE}
+
+buy("potatoes", kg = "1") %>% 
+  peel() %>% 
+  cut() %>% 
+  boil(minutes = "15") %>% 
+  drain() %>% 
+  mash(add = list("salt", "milk", "butter")) %>% 
+  serve(decorate = "parsley")
+```
+

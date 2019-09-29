@@ -1,0 +1,78 @@
+---
+title: "Importing data"
+author: "Richard J. Telford"
+date: "September 29, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Which format?
+
+Almost all data formats can be imported into R
+
+- text format (.csv, .txt etc) with `readr::read_delim` or `read.table` and related functions
+- excel files with `readxl::read_excel`
+- databases with `DBI::dbConnect` and the `dplyr` functions.
+- shapefiles with `sf::st_read`
+- LiPD: [Linked Paleo Data](http://wiki.linked.earth/Linked_Paleo_Data)
+- etc
+
+## Basic principles of data formatting
+
+- be consistent
+- write dates as YYYY-MM-DD
+- do not leave any cells empty
+- put just one thing in a cell
+- organize the data as a single rectangle (with subjects as rows and variables as columns, and with a single header row)
+- create a data dictionary
+- do not include calculations in the raw data files
+- do not use font color or highlighting as data
+- choose good names for things
+- use data validation to avoid data entry errors
+- save the data in plain text files.  [Broman & Woo (2018) Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)
+
+## Other peoples data
+
+No guarantee principles followed!
+
+Do not edit the raw data!
+
+Reproducible solution is to use code to import.
+
+## Text files
+
+
+
+## Excel files
+
+Import the Wonderkrater pollen data.
+
+You will need to check the help file to see the options
+
+```{r excel, echo = TRUE}
+library("readxl")
+?read_excel
+```
+
+
+## Importing lots of files
+
+If all files have the same format, it is possible to load them all at once
+
+```{r multiple_files, eval = FALSE}
+library("tidyverse") #want to use purrr package
+
+files <- list.files(path = "data/", #where to look
+                    pattern = "\\.csv$", #name must end .csv
+                    full.names = TRUE)# return name and path
+
+files %>%
+  set_names() %>% #want to be able to use names
+  # run read_csv on each name and return results as a single data.frame
+  map_df(read_csv, skip = 1, .id = "name")
+```
+
+

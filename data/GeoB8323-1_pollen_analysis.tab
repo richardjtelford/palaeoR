@@ -1,0 +1,88 @@
+/* DATA DESCRIPTION:
+Citation:	Dupont, Lydie M; Zhao, Xueqin (2015): Pollen analysis of sediment core GeoB8323-1. PANGAEA, https://doi.org/10.1594/PANGAEA.855763, 
+	In supplement to: Zhao, X; Dupont, Lydie M; Schefuß, Enno; Meadows, Michael E; Hahn, A; Wefer, Gerold (2016): Holocene vegetation and climate variability in the winter and summer rainfall zones of South Africa. The Holocene, 26(6), 843-857, https://doi.org/10.1177/0959683615622544
+Project(s):	Center for Marine Environmental Sciences (MARUM) (URI: http://www.marum.de/en/)
+	Regional Archives for Integrated iNvestigations (RAiN) (URI: https://www.marum.de/R_A_I_N.html)
+Coverage:	LATITUDE: -32.031500 * LONGITUDE: 18.221500
+	DATE/TIME START: 2003-01-29T16:13:00 * DATE/TIME END: 2003-01-29T16:13:00
+	MINIMUM DEPTH, sediment/rock: 0.005 m * MAXIMUM DEPTH, sediment/rock: 0.345 m
+Event(s):	GeoB8323-1 * LATITUDE: -32.031500 * LONGITUDE: 18.221500 * DATE/TIME: 2003-01-29T16:13:00 * ELEVATION: -90.0 m * Recovery: 0.45 m * CAMPAIGN: M57/1 (URI: https://doi.org/10.2312/cr_m57) * BASIS: Meteor (1986) (URI: https://de.wikipedia.org/wiki/Meteor_(Schiff,_1986)) * DEVICE: MultiCorer (MUC) * COMMENT: Very dark grayish brown, mud, shell fragments of molluscs, living gastropods, worms. BWT: 12.4°C. BWS for d13C and d18O analysis
+Parameter(s):	DEPTH, sediment/rock [m] (Depth) * GEOCODE * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html)
+	Depth, bottom/max [m] (Depth bot) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html)
+	Depth, top/min [m] (Depth top) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html)
+	AGE [ka BP] (Age) * GEOCODE * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html)
+	Age [a AD] (Age) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html)
+	Pinus [#/cm**3] (Pinus) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Quercus [#] (Que) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Celastraceae/Hippocrateaceae [#] (Cela/Hipp) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Combretaceae [#] (Comeae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Diospyros [#] (Diospyro) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Myrica [#] (Myr) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Olea [#] (Ole) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Podocarpus [#] (Pod) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Rhamnaceae [#] (Rhaae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Rhus-type [#] (Rhu-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Lannea [#] (Lannea) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Artemisia-type [#] (Art-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Pentzia-type [#] (Pentzia-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Compositae Tubuliflorae [#] (AsteTubu) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Gazania-type [#] (Gazania-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Poaceae [#] (Poac) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Alchornea [#] (Alchornea) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Aloe-type [#] (Aloe-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Brassicaceae [#] (Braae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Caryophyllaceae [#] (Cphae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Convolvulaceae (Africa) [#] (Conae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Elaeagnaceae [%] (Elaeagnaceae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Labiatae [#] (Lab) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Leguminosae [#] (Leg) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Myrsine [#] (Myrsine) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Rubiaceae [#] (Rubae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Rutaceae [#] (Rutae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Scrophulariaceae (Africa) [#] (Scrophul) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Anthospermum [#] (Anthosp) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Stoebe-type [#] (Stoebe-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Cliffortia [#] (Cliffortia) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Ericaceae [#] (Eriae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Neurada/Grielum [#] (Neurceae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Protea [#] (Protea) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Restionaceae [#] (Restceae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Passerina [#] (Passerina) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Justicia/Monechma [#] (Just/Mone) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Aizoaceae [#] (Aizoeae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Euphorbia [#] (Eup) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Euphorbiaceae undifferentiated [#] (Euphceae.ud) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Solanaceae [#] (Solae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Crassulaceae [#] (Craae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Amaranthaceae/Chenopodiaceae [#] (Chen/Amar) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Tribulus [#] (Tus) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	undetermined [#] (varia) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Cyperaceae [#] (Cypae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Gunnera perpensa [#] (G. perpensa) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Phragmites-type [#] (Phy-T) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Typha [#] (Typ) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Haloragaceae [#] (Halae) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Spores, monolete [#] (monolete) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Spores, trilete [#] (trilete spores) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Ophioglossum [#] (Oph) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Fern spores [#] (Fern spores) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Pollen total [#] (Pollen tot) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Marker, found [#] (Mark found) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Volume [ml] (Vol) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+	Marker, added [#] (Mark add) * PI: Dupont, Lydie M (https://orcid.org/0000-0001-9531-6793, dupont@uni-bremen.de, http://www.marum.de/en/Lydie_Dupont.html) * METHOD: Counting, palynology
+License:	Creative Commons Attribution 3.0 Unported (CC-BY-3.0)
+Size:	732 data points
+*/
+Depth [m]	Depth bot [m]	Depth top [m]	Age [ka BP]	Age [a AD]	Pinus [#/cm**3]	Que [#]	Cela/Hipp [#]	Comeae [#]	Diospyro [#]	Myr [#]	Ole [#]	Pod [#]	Rhaae [#]	Rhu-T [#]	Lannea [#]	Art-T [#]	Pentzia-T [#]	AsteTubu [#]	Gazania-T [#]	Poac [#]	Alchornea [#]	Aloe-T [#]	Braae [#]	Cphae [#]	Conae [#]	Elaeagnaceae [%]	Lab [#]	Leg [#]	Myrsine [#]	Rubae [#]	Rutae [#]	Scrophul [#]	Anthosp [#]	Stoebe-T [#]	Cliffortia [#]	Eriae [#]	Neurceae [#]	Protea [#]	Restceae [#]	Passerina [#]	Just/Mone [#]	Aizoeae [#]	Eup [#]	Euphceae.ud [#]	Solae [#]	Craae [#]	Chen/Amar [#]	Tus [#]	varia [#]	Cypae [#]	G. perpensa [#]	Phy-T [#]	Typ [#]	Halae [#]	monolete [#]	trilete spores [#]	Oph [#]	Fern spores [#]	Pollen tot [#]	Mark found [#]	Vol [ml]	Mark add [#]
+0.005	0.00	0.01	-0.053	2003	5	0	0	0	0	0	1	2	0	1	0	14	17	28	0	31	0	0	2	0	0	0	1	0	0	2	0	0	13	19	5	13	1	2	42	9	0	30	0	0	0	0	23	1	12	25	0	5	1	0	0	0	1	1	293	295	5.0	37168
+0.035	0.03	0.04	-0.043	1993	0	0	0	1	0	0	0	1	2	0	0	11	6	25	0	31	0	0	0	0	0	1	0	0	0	1	0	1	10	23	3	11	0	2	63	13	2	16	1	1	1	1	20	0	16	29	0	8	0	2	2	1	0	3	286	214	5.0	37168
+0.075	0.07	0.08	-0.030	1980	5	0	1	0	0	1	0	1	1	0	0	18	14	20	0	26	0	0	1	0	0	0	0	0	1	1	1	0	13	20	6	7	1	1	52	8	0	34	0	1	3	0	16	1	17	32	0	3	0	0	1	1	0	2	289	238	5.5	37168
+0.105	0.10	0.11	-0.021	1971	2	0	2	0	0	5	0	0	0	0	1	8	18	29	0	31	0	0	0	0	0	0	0	0	0	0	1	0	8	24	3	6	2	0	45	7	1	25	0	3	1	0	21	2	24	29	0	3	0	0	1	1	0	2	277	239	5.0	37168
+0.135	0.13	0.14	-0.011	1961	1	0	0	0	1	3	1	0	0	3	0	8	15	34	0	34	0	0	2	0	0	0	0	0	0	1	1	0	5	18	1	6	2	0	60	10	1	26	3	1	0	0	24	1	22	22	0	5	0	0	0	0	0	0	289	266	4.5	37168
+0.165	0.16	0.17	-0.001	1951	5	0	0	0	1	3	0	1	1	1	0	12	11	36	0	26	0	2	0	1	1	0	0	1	1	3	1	0	9	26	3	7	0	1	40	6	2	24	5	1	3	0	24	0	22	24	0	8	0	1	0	0	0	0	291	219	5.0	37168
+0.195	0.19	0.20	0.009	1941	4	0	0	0	0	3	0	0	1	1	0	9	15	38	0	28	0	0	1	0	0	3	0	1	0	1	2	0	9	30	2	4	0	0	52	10	0	17	2	0	3	0	19	0	15	28	0	6	0	1	3	0	0	3	290	293	6.4	37168
+0.225	0.22	0.23	0.018	1932	1	0	0	0	0	5	0	1	0	0	0	14	12	23	0	31	1	1	0	0	0	0	0	1	0	1	0	0	15	11	3	6	1	0	48	5	1	13	0	0	3	0	22	1	24	25	0	8	0	2	1	2	0	3	255	281	4.7	37168
+0.255	0.25	0.26	0.028	1922	1	0	0	0	1	2	0	0	0	2	0	11	11	18	0	23	0	0	0	0	0	0	0	0	0	0	1	0	10	28	2	5	0	0	50	4	1	19	1	0	2	0	23	0	16	27	1	10	1	0	0	0	0	0	254	201	5.0	37168
+0.285	0.28	0.29	0.038	1912	3	1	0	0	0	1	0	0	0	1	0	6	10	17	1	20	0	0	0	0	0	0	0	0	0	0	0	0	10	15	2	9	1	0	36	5	1	23	0	0	1	0	14	2	27	16	0	5	1	0	1	2	0	3	201	169	5.0	37168
+0.315	0.31	0.32	0.048	1902	1	1	1	0	0	2	1	0	0	0	0	11	9	20	0	18	1	1	0	0	0	0	0	0	0	0	1	0	10	10	2	6	0	2	32	4	0	10	2	0	1	0	15	1	15	19	0	2	0	0	0	2	0	2	183	197	5.2	37168
+0.345	0.34	0.35	0.057	1893	0	0	0	0	0	2	0	0	1	1	0	13	5	26	0	21	0	0	0	0	1	1	0	0	0	1	1	0	8	16	1	5	0	2	43	2	0	7	2	0	1	0	15	0	10	16	1	8	0	0	1	0	0	1	200	180	6.0	37168
