@@ -44,6 +44,18 @@ Reproducible solution is to use code to import.
 
 ## Text files
 
+`readr::read_delim` is faster and has better defaults than `read.table`
+
+Reports what how it formatted data (can force format if needed)
+
+Returns a `tibble`
+
+```{r readr, eval = FALSE}
+GeoB8323_1 <- read_delim("data/GeoB8323-1_pollen_analysis.tab", 
+                         skip = 75, 
+                         delim = "\t")
+GeoB8323_1
+```
 
 
 ## Excel files
@@ -66,13 +78,17 @@ If all files have the same format, it is possible to load them all at once
 library("tidyverse") #want to use purrr package
 
 files <- list.files(path = "data/", #where to look
-                    pattern = "\\.csv$", #name must end .csv
+                    pattern = "\\.tab$", #name must end .tab
                     full.names = TRUE)# return name and path
 
 files %>%
   set_names() %>% #want to be able to use names
   # run read_csv on each name and return results as a single data.frame
-  map_df(read_csv, skip = 1, .id = "name")
+  map_df(read_delim, delim = "\t", .id = "name")
+#actually need something a little more complex as skip needs to be set
+#would be easier to use `pangaear` package
 ```
 
+## Task
 
+Import one of your data files (or improve your import code)

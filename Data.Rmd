@@ -14,3 +14,5 @@ knitr::opts_chunk$set(echo = TRUE)
 [Wonderkrater](https://www.ncdc.noaa.gov/paleo-search/study/13155), South Africa 20,000 Year Pollen Data ([Scott, 1982](http://dx.doi.org/10.1016/0033-5894(82)90028-X 
 ))
 
+[GeoB8323](https://doi.org/10.1594/PANGAEA.855836) : Holocene vegetation and climate variability in the winter and summer rainfall zones of South Africa [Zhao et al. (2016)](https://doi.org/10.1177/0959683615622544)
+
