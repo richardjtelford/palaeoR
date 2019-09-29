@@ -1,0 +1,207 @@
+---
+title: Adopt a Style Guide
+subtitle: "Bio302 - Biological data analysis II"
+author: 
+- name: "Richard J. Telford"
+institute: Department of Biological Sciences, University of Bergen
+date: '2019-05-05'
+output: 
+ ioslides_presentation:
+  widescreen: true
+---
+
+```{r setup_stg, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##
+<blockquote class="twitter-tweet" data-lang="en" width = "550"><p lang="en" dir="ltr">The only way to write good code is to write tons of shitty code first. Feeling shame about bad code stops you from getting to good code</p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/589068687669243905">17 April 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+## Why
+
+ - Makes code easier to read
+ - Makes code easier to debug
+
+Make your own style - but be consistent
+
+## Naming Things
+
+>    “There are only two hard things in Computer Science: cache invalidation and naming things.”
+
+>    — Phil Karlton
+
+## Naming Objects
+
+ - Names can contain letter numbers "_"" and "."
+ - Names must begin with a letter or "."
+ - Avoid using names of existing functions - confusing
+ - Make names concise yet meaningful
+ - Reserved words include TRUE, for, if
+ 
+ Combining words
+ 
+ - CamelCase  
+ - lowerCamelCase
+ - snake_case
+ - best.avoided #confusion potential with R functions
+ 
+## Which of these are valid names?
+
+ - min_height
+ - max.height 
+ - _age 
+ - .mass 
+ - MaxLength 
+ - min-length 
+ - FALSE
+ - 2widths 
+ - celsius2kelvin 
+ - plot
+ - T
+
+ 
+## Spacing
+
+White-space is free! 
+
+Makes code more readable
+
+Place spaces around all infix operators (`%>%`, `+`, `-`, `<-`, (but not `:` or `::` )) and around `=` in function calls. 
+
+Always put a space after a comma, and never before.
+
+### Good
+```{r, eval = FALSE}
+average <- mean(feet / 12 + inches, na.rm = TRUE)
+ChickWeight[1, ]
+```
+### Bad
+```{r, eval = FALSE}
+average<-mean(feet/12+inches,na.rm=TRUE)
+ChickWeight[1,]
+```
+
+## Split long commands over multiple lines
+
+```{r, eval = FALSE}
+list(
+  total = a + b + c, 
+  mean  = (a + b + c) / n
+)
+```
+
+## Indentation makes code more readable
+
+### Good
+```{r, eval = FALSE}
+pos <- function(x) {
+  if (is.null(dim(x))) {
+    x[x > 0]
+  } else{
+    x[, colSums(x) > 0, drop  = FALSE]
+  }
+}
+```
+
+### Bad
+```{r, eval = FALSE}
+pos <- function(x){
+if(is.null(dim(x)))
+{x[x >0]} 
+else{
+x[, colSums(x) > 0, drop  = FALSE]
+}}
+```
+
+## Assignment
+
+Use `<-`, not `=`, for assignment.
+
+### Good
+```{r, eval = FALSE}
+x <- 5
+```
+### Bad
+```{r, eval = FALSE}
+x = 5
+```
+
+## Comments
+
+Use # to start comments.
+
+Help you and others to understand what you did
+
+Comments should explain the why, not the what.
+
+Use comments to break up file into readable chunks for navigation
+```{r, eval = FALSE}
+#### Load data ####
+...
+#### Plot data ####
+...
+```
+ 
+## Split analyses over multiple files
+
+Long scripts become difficult to navigate
+
+Fix by moving parts of the code into different files
+
+For example: 
+
+ - data import code to "loadData.R"
+ - functions to "functions.R"
+
+Import with  
+```{r, eval = FALSE}
+source("loadData.R")
+source("functions.R")
+```
+ 
+## Don't repeat yourself
+
+Repeated code is hard to maintain
+
+Make repeated code into functions.
+
+```{r, eval = FALSE}
+my_fun <- function(arg1) {arg1 ^ 2}
+my_fun(7)
+```
+Single place to maintain
+
+Reuse ggplot objects or entire plots
+
+```{r, eval = FALSE}
+g <- ggplot(iris, aes(x = Petal.Length, y = Sepal.Length, colour = Species))  +
+  geom_point() 
+g
+g2 <- g + aes(y = Petal.Length) # new aesthetics. Use %+% to change dataset
+g2
+```
+
+
+ 
+## Avoid `attach()`
+
+Unless you like strange bugs
+
+Very rarely useful to attach - many better options
+
+[https://coderclub.b.uib.no/2016/05/03/dont-get-attached-to-attach/](https://coderclub.b.uib.no/2016/05/03/dont-get-attached-to-attach/)
+ 
+## Reading
+
+Google's R Style Guide [https://google.github.io/styleguide/Rguide.xml](https://google.github.io/styleguide/Rguide.xml)
+
+Hadley Wickham, H. Style Guide _Advanced R_
+[http://adv-r.had.co.nz/Style.html](http://adv-r.had.co.nz/Style.html)
+
+## Exercise
+
+Take some of your existing R code and reformat it according to these style guides. 
+
+Check your code still works!
