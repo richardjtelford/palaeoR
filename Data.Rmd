@@ -1,0 +1,16 @@
+---
+title: "Included Datasets"
+author: "Richard J. Telford"
+date: "September 29, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##
+
+[Wonderkrater](https://www.ncdc.noaa.gov/paleo-search/study/13155), South Africa 20,000 Year Pollen Data ([Scott, 1982](http://dx.doi.org/10.1016/0033-5894(82)90028-X 
+))
+
