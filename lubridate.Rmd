@@ -1,0 +1,42 @@
+---
+title: Lubridate
+subtitle: "Bio302 - Biological data analysis II"
+author: 
+- name: "Richard J. Telford"
+institute: Department of Biology, University of Bergen
+date: '2016-05-05'
+output: 
+ ioslides_presentation:
+  widescreen: true
+---
+
+```{r setup_lub, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE)
+```
+
+## Dates with `lubridate`
+
+Converting strings to dates is tricky.
+
+ - many formats
+
+```{r}
+dat <- "26 October 2016 14:39:10 CEST"
+as.POSIXct(dat, format = "%d %B %Y %H:%M:%S")
+```
+
+Lubridate makes this easy.
+
+```{r}
+library("lubridate")
+dmy_hms(dat)
+```
+Need to use function with time units in correct order
+
+## Tasks
+
+Use the `lubridate` package to convert the following to date or datetime 
+
+"28/02/1999"
+
+"July 1 2001 2:14"
