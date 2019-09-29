@@ -1,0 +1,162 @@
+---
+title: "Version control III: Git in RStudio"
+author: "Reproducible Science Workshop"
+output:
+  ioslides_presentation:
+    highlight: pygments
+    widescreen: yes
+---
+
+# Overview
+
+## RStudio and version controls
+
+RStudio includes integrated support for two open source version control systems:
+
+- Git
+- Subversion
+
+For this lesson we will focus on Git.
+
+## Two requirements
+
+1. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) 
+
+2. Be familiar with using RStudio Projects, which are required for version control features to be enabled
+    - RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.
+
+# Step-by-step
+
+## Follow along demo
+
+**Step 1:** Open your `palaeo_R` project in rstudio
+
+**Step 2:** Configure rstudio.
+
+tools >> Global Options >> Git/SVN >> Create RSA key  
+
+Copy key and go to github.com
+
+go to settings (under user icon) >> security
+
+Paste rsa key
+
+**Step 3** Configure git 
+
+```{r, eval  = FALSE}
+usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.com")
+```
+
+
+**Step 4:** Use the `usethis` package to add git to your project
+
+```{r}
+usethis::use_git()# initiates a local git repo
+usethis::use_github()# creates repo on github
+```
+
+Now restart rstudio.
+
+This should have made a local repo and a copy on github. Should be a new Git tab in rstudio with solid green arrows. Some troubleshooting may be required.
+
+You only need to do this once per project.
+
+
+
+## Cloning
+
+Can also clone projects already on github with
+
+`usethis::create_from_github` 
+
+or with file >> new project 
+
+
+<br>
+
+1. In RStudio, go to File, and then New Project
+2. Click on *Version Control: Checkout a project from a version control repository*
+3. Click on *Git: Clone a project from a repository*
+4. Fill in the info:
+    - URL: use HTTPS address
+    - Create as a subdirectory of: Browse to where you would like to create this folder
+        
+        
+## Step 5: Stage
+
+**Stage your changes to be committed.**
+
+<br>
+
+1. Go to the Git pane in RStudio.
+2. Stage the one or more of your code files by checking the boxes next to then, and hit Commit.
+
+<br><br>
+
+*Don't worry about the other files that appear in this pane, we'll get to them in a bit.*
+
+## Step 6: Commit
+
+**View the diff, and commit your changes, with a commit message.**
+
+<br>
+
+1. In the pop-up window view the *diff* for the Rmd file. You can view it for the HTML file as well if you like.
+2. Enter an **informative** commit message, like "Changed analysis year to X", and hit Commit.
+
+## Step 6: Push
+
+**Push your changes to your GitHub repository.**
+
+**push**: When using git push always means pushing commits from your local respository (your computer) to a remote repository (Github).
+
+<br>
+
+1. Now push your changes to GitHub by hitting Push.
+2. Enter login information as needed.
+
+<br><br>
+
+*Getting an error? Can't push? See [here](https://github.com/jennybc/stat540_2014/blob/master/seminars/seminar92_git.md) under GitHub password.*
+
+## Make an edit
+
+Now edit the file you pushed.
+
+Use the Diff button on the Git pane to see what changed
+
+
+# Other day one essentials
+
+## More info on the Git pane
+
+File tracking:
+
+- The RStudio Git pane lists every file that’s been added, modified or deleted. 
+
+- The icon describes the change:
+    + ![git-mod](fig/rstudio-git-modified.png) **Modified:** You've changed the contents of the file.
+    + ![git-unt](fig/rstudio-git-unknown.png) **Untracked:** You've added a new file that Git hasn't seen before.
+    + ![git-unt](fig/rstudio-git-deleted.png) **Deleted:** You've deleted a file.
+
+You can get more details about modifications with a ![git-unt](fig/rstudio-git-diff.png):
+
+- Green: added text
+
+- Red: removed text
+
+## .gitignore?
+
+- `.gitignore`: Git uses this file to determine which files and directories to ignore, before you make a commit.
+
+## Reading
+
+http://www.r-bloggers.com/rstudio-and-github/
+
+http://r-pkgs.had.co.nz/git.html
+
+http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst
+
+[Happy git with R](https://happygitwithr.com/)
+
+[Git flight rules](https://github.com/k88hudson/git-flight-rules)
