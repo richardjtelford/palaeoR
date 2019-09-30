@@ -37,3 +37,4 @@ rsconnect/
 
 #temporary excel files
 *.xls#
+.Rproj.user
