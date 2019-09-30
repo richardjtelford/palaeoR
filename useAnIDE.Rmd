@@ -1,0 +1,97 @@
+---
+title: Use an Integrated Development Environment
+subtitle: "Bio302 - Biological data analysis II"
+author: 
+- name: "Richard J. Telford"
+institute: Department of Biology, University of Bergen
+date: '2019-05-05'
+output: 
+ ioslides_presentation:
+  widescreen: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Why
+
+A good IDE makes R coding more efficient and reduces some types of bugs
+
+ - Bracket matching
+ - Autocomplete of function/variable names
+ - Integrated help
+ - Project management and version control
+ - Help debugging
+ - integration with Rmarkdown
+
+## Choices
+
+ - Tinn-R (Windows only)
+ - RKWard
+ - emacs
+ - __RStudio__ [rstudio.com](https://www.rstudio.com)
+
+## Demonstration
+
+ - Autocompletion
+ - Bracket matching
+ - Code formatting
+ - alt-shift-k to get shortcuts
+ 
+## Project management
+
+Use Rstudio projects for project management
+
+ - Keeps related files together
+ - Keeps track of working directory, history and environment
+ - Integration with version control
+ 
+## Use relative paths 
+
+`read_table("data/myfile.txt")` # good
+
+`read_table("c:/projects/myProject/mysubproject/mysubsubsubproject/myfolderwithaverylongname/data/myfile.txt")` # bad
+ 
+Or, better, use `here` package
+
+```{r}
+library("here")
+read_table(here("data/myfile.txt"))#makes code independent of rstudio
+```
+ 
+## Setting R-studio up
+
+Don't save/restore workspace
+
+`Tools >> Global Options >> General`
+
+ - `Save workspace to .Rdata on exit -> Never`
+ - `Restore .Rdata into workspace on startup -> OFF`
+
+Word-wrap 
+
+`Tools >> Global Options >> Code >> soft-wrap R source files`
+ 
+## Exercise
+
+Set up an Rstudio project called `palaeo_R`
+
+We will use this project all week.
+
+Open a new script and start to __type__ some code
+
+```{r, eval = FALSE}
+library("tidyverse")
+set.seed(42) # make reproducible
+df <- tibble(#a tibble is a better data.frame - compare
+  x = 1:10,
+  y = rnorm(10)
+)
+
+ggplot(df, aes(x = x, y = y)) + 
+  geom_point()
+```
+
+Become familiar with the autocomplete, sending code to the console and some shortcuts

@@ -1,0 +1,241 @@
+---
+title: "Rmarkdown"
+author: "Richard J. Telford"
+date: "January 30, 2019"
+output: ioslides_presentation
+bibliography: etc/reproducibility.bib
+csl: etc/elsevier-harvard_rjt.csl
+---
+
+```{r setup_rmd, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+bt <- "`"
+```
+
+## Why
+
+ - Interlaced R code and text compiles to make presentation/paper/thesis 
+ - Dynamic documents - update when data/code changes
+ - Reproducible analyses
+ - Simple formatting
+ - Text files - good for version control
+
+## Output formats
+
+Documents
+
+ - PDF
+ - HTML
+ - word
+
+Presentations
+
+ - ioslides
+ 
+ PDF needs extra packages and TeX `tinytex::install_tinytex()`
+
+## Getting stated
+
+In RStudio
+
+`File>>New File>>R Markdown...`
+
+Select options for document format
+
+R gives example document to edit
+
+Click `Knit` button to render
+
+Or use `rmarkdown::render()`
+
+## YAML
+
+Meta data at top of Rmd file that describes how file is to be processed.
+
+```
+---
+title: "Untitled"
+author: "Richard J. Telford"
+date: "`r paste0(bt, "r format(Sys.Date(), '%d %B %Y')", bt)`"
+header-includes:
+   - \usepackage{lineno}
+   - \linenumbers
+output: pdf_document
+classoption: a4paper
+---
+```
+
+
+## R chunks
+
+R code in chunks
+
+\```{r chunkName, eval = TRUE}  
+#some R code  
+library(vegan)  
+x <- 2  
+y <- 7  
+\```
+
+Chunk name is optional.
+
+Chunk options
+
+ - `eval` Run the R code
+ - `echo` Show the R code
+
+Full list [http://yihui.name/knitr/options/](http://yihui.name/knitr/options/)
+
+## Inline code
+
+Seven times six is `` `r '\x60r 7 * 6\x60'` ``
+
+Seven times six is `r 7 * 6`
+
+
+
+## Formatting
+
+```
+# title (new section in ioslides)
+## subtitle (new page in ioslides)
+### sub-subtitle
+#### sub-sub-subtitle
+_italics_ or *italics*
+__bold__ or **bold**
+ $A = \pi*r^{2}$ 
+```
+<hr>
+### sub-subtitle  
+_italics_ or *italics*  
+__bold__ or **bold**  
+ $A = \pi r^{2}$  
+ <hr>
+
+[Rmarkdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+Can include LaTeX commands (for pdf) or html (for html)
+
+## Tables {.subsection}
+
+```{r tables, echo = TRUE}
+head(iris, 3) %>% knitr::kable(caption = "A kable table")
+```
+
+`kableExtra` package for more control
+
+## Table and Figure numbering {.subsection}
+
+```{r comment = "", echo = FALSE}
+'{r cars-figure, fig.cap="Plot showing relationship ..."}
+ggplot(mtcars, aes(wt, mpg)) + geom_point()
+' -> my_code_string
+
+cat("```", my_code_string, "```", sep = "")
+```
+
+Refer to figure with \\\@ref(fig:cars-figure)) 
+
+Important: 
+
+- no `_` in chunk name
+- use `bookdown::pdf_book` as output format in YAML
+
+Possible to reference external files with LaTeX `xr` package.
+
+## Citations {.subsection}
+
+In the YAML
+
+```
+bibliography: reproducibility.bib
+csl: elsevier-harvard.csl
+```
+- bibliography is bibtex file
+- csl file sets citation style
+
+Many csl files [available]( 
+https://github.com/citation-style-language/styles)
+
+
+## Citations
+
+In the text
+
+```
+Reproducibility code [@Cooper2017] ...
+Cooper and Hsing [-@Cooper2017] discuss ... 
+```
+
+Output depends on csl file
+
+<hr>
+Reproducibility code [@Cooper2017] ...   
+Cooper and Hsing [-@Cooper2017] discuss ...  
+<hr>
+
+Reference list printed at end of the MS.
+
+`citr` package makes Rstudio add-in for adding citations to the text.
+
+## Journal specific formatting {.subsection}
+
+Use `rticles` package to produce MS in journal specific format. 
+
+To make draft with correct YAML. Many different journal styles available
+
+```{r rticles, eval = FALSE, echo = TRUE}
+library(rmarkdown)
+draft("MyArticle.Rmd", template = "plos_article", package = "rticles")
+```
+
+## Code overload?
+
+Slow code? Cache chunks with 
+
+```{r comment = "", echo = FALSE}
+'{r chunk, cache = TRUE}
+ggplot(mtcars, aes(wt, mpg)) + geom_point()
+' -> my_code_string
+
+cat("```", my_code_string, "```", sep = "")
+```
+
+Too much code? Use `knitr::read_chunk` to read code from a file.
+
+```{r comment = "", echo = FALSE}
+'{r load_chunks, cache = FALSE, message=FALSE}
+knitr::read_chunk("R/load_data.R")
+# file includes line  ## ---- load_data
+' -> code
+
+'{r load_data}' -> code2
+
+cat("```", code, "```\n```", code2, "\n```", sep = "")
+
+```
+
+Better solution - `drake` package
+
+## drake
+
+Caches intermediate objects, only remakes them if code or data changes.
+
+See example
+
+```{r, eval = FALSE}
+drake::drake_example("main")
+```
+
+
+
+## Reading list
+
+Reproducible Science with Rmarkdown
+http://pakillo.github.io/Rmarkdown_talk_SevillaR_Nov2014/#/
+
+Rmarkdown reference guide https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+
+Rmarkdown cheat sheet
+https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf
