@@ -1,0 +1,373 @@
+---
+title: ggplot and other tools
+subtitle: "Bio302 - Biological data analysis II"
+author: 
+- name: "Richard J. Telford"
+institute: Department of Biology, University of Bergen
+date: '2016-05-05'
+output: 
+ ioslides_presentation:
+  widescreen: true
+---
+
+```{r setup_gg, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 4, fig.width = 5, cache = TRUE, message = FALSE, cache.lazy = TRUE)
+library("dplyr")
+```
+
+## ggplot2
+
+Part of `tidyverse`
+
+```{r}
+library("tidyverse")
+```
+Produces publication quality graphics
+
+Implementation of the Grammar of Graphics
+
+Written by Hadley Wickham
+
+
+## Some Data
+
+Population, life expectancy and per capita GDP by country since the 1950s
+
+```{r}
+if(!require("gapminder")){
+  install.packages("gapminder")
+  library("gapminder")
+}
+data("gapminder")
+head(gapminder)
+```
+
+## Anatomy of a ggplot2 command
+
+Add components together.
+```{r anatomy}
+g <- ggplot(gapminder, #data
+       aes(x = gdpPercap, y = lifeExp, size = pop, colour = continent)) + #aesthetics
+  geom_point() + # geometry
+  #geom_smooth() + #statistics
+  facet_wrap(~ year) + #facets
+  #coord_flip + #coordinates
+  scale_x_log10() + #scales
+  labs(x = "GDP per capita") + #labels
+  theme() #theme
+```
+
+Can add components to existing ggplot2 object
+```{r, eval = FALSE}
+g <- ggplot(gapminder, #Data
+       aes(x = gdpPercap, y = lifeExp, size = pop, colour = continent)) #aesthetics
+g <- g +  geom_point() 
+```
+
+##
+Need to `print` ggplot2 object
+```{r, fig.height=5, fig.width=5.5}
+print(g)
+```
+
+
+## Data
+Data should be a tidy `data.frame` or `tibble`
+
+Variables in columns, and observations the rows
+
+May need to reshape data with `tidyr::pivot_longer`
+
+May need to subset or summarise data
+
+## Aesthetics
+
+How to map the columns in the data onto the visual properties of the plot
+
+`aes(x = gdpPercap, y = lifeExp, size = pop, colour = continent)`
+
+Other aesthetics include 
+
+ - `linetype`
+ - `alpha`
+ - `fill` # for areas
+ - `ymax`
+ - `ymin`
+ - `group` # to denote how data should be grouped
+
+
+## Geometry
+
+What to draw. Can use more than one.
+
+Use different aesthetics
+
+Some examples
+
+ - `geom_bar()`
+ - `geom_histogram()`
+ - `geom_line()`
+ - `geom_path()`
+ - `geom_histogram()`
+ - `geom_text()`
+ - `geom_tile()`
+
+Every geom has an associated stat. Can override default.
+
+##
+```{r}
+g <- ggplot(filter(gapminder, year == 1957), aes(x = lifeExp, fill = continent)) +
+  geom_histogram()
+g
+```
+
+## Setting vs mapping aesthetics
+
+Map aesthetics inside `aes`
+```{r, fig.height=3, fig.width=3}
+ggplot(filter(gapminder, year == 1957), 
+       aes(x = gdpPercap, y = lifeExp, colour = continent)) +
+  geom_point()
+```
+
+##
+
+Try to make all points blue
+
+```{r, fig.height=3, fig.width=3}
+ggplot(filter(gapminder, year == 1957), 
+       aes(x = gdpPercap, y = lifeExp, colour = "blue")) +
+  geom_point()
+```
+
+##
+
+Set aesthetics outside `aes` 
+```{r, fig.height=3, fig.width=3}
+g2 <- ggplot(filter(gapminder, year == 1957), aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(colour = "blue")
+g2
+```
+
+
+## Statistics
+
+Statistics for the plot
+
+- `stat_bin()`
+- `stat_histogram()`
+- `stat_boxplot()`
+
+Every stat has an associated geom. Can override default.
+
+## geom_smooth()
+
+Adds regression model + 95% CI to plot
+
+For small data sets, uses loess
+
+For large data sets, uses gam
+
+Can override and use any `method`
+
+Works best for simple models. Fit complex models seperately
+
+Uses `x`, `y`, weight from `aes`
+
+`g + geom_smooth(method = "lm", formula = y ~ x)`
+
+
+## Scales
+
+Control how the data are mapped onto the aesthetics
+
+ - `scale_x_continuous`
+ - `scale_fill_discrete`
+ - `scale_colour_brewer`
+ - `scale_y_log10`
+
+Most useful arguments: `breaks`, `labels` and `values`
+
+##
+```{r}
+g <- g + scale_fill_manual(values = continent_colors) 
+g
+```
+
+##
+
+```{r}
+g2 + scale_x_log10()
+```
+
+
+## Facets
+
+Split the data into partitions
+
+ - `facet_wrap()` By one variable
+ - `facet_grid()` By two variables
+
+```{r, fig.height = 3.5}
+g2 + facet_wrap(~ continent)
+
+```
+
+
+## Coordinates
+
+ - `coord_flip()` Flip x and y axis
+ - `coord_map()` Projections for maps from `mapproj`
+```{r}
+g + coord_flip()
+```
+
+
+## Labels etc
+
+If the names of your data are not the labels you need
+```{r}
+g <- g + labs(x = "Life Expectancy", y = "Count", fill = "Continent")
+g
+```
+
+
+
+## Themes
+
+Don't like the default plot? Change it with theme
+
+ - `theme_bw()`
+ - `theme_classic()`
+```{r, fig.height=3, fig.width=4}
+g + theme_classic()
+```
+
+ 
+##
+
+Change any element of the figure
+
+```{r, fig.height = 3.5}
+g <- ggplot(gapminder, aes(x = continent, y = lifeExp)) + 
+  geom_boxplot()
+g + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+See `?theme` to see elements to change
+ 
+## Legends
+
+Legends appear automatically when required
+
+Can turn off with `show.legend` argument to the `geom_xxx`
+
+Can move with
+
+`g + theme(
+     legend.justification = c(1, 0), 
+     legend.position = c(1, 0))`
+ 
+## Saving plots
+```{r}
+ggsave("myplot.png")
+```
+Works out what format to use from extension
+
+Arguments to change size
+
+
+## Multiple plots per page
+Need help from extra packages `grid`, `gridExtra`, or `cowplot`
+
+```{r}
+library(gridExtra)
+grid.arrange(g, g2, ncol = 2, nrow = 1)
+```
+
+## Resources
+
+GGplot cheat sheet https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+R Graphics Cookbook - http://www.cookbook-r.com/Graphs/index.html
+  
+ggplot2: Elegant Graphics for Data Analysis - https://ggplot2-book.org/
+
+Stackoverflow.com search with tag [ggplot2]
+
+## GG related packages
+
+ggfortify - plotting R objects from some packages
+
+GGalley - pairs plots
+
+ggmaps - maps
+
+plotly - interative plots
+
+cowplot - different default themes
+
+## GGally{.columns-2}
+
+Pairs plots
+
+```{r, fig.height = 5, fig.width = 5}
+if(!require("GGally")){
+  install.packages("GGally")
+  library("GGally")
+}
+
+ggpairs(
+  gapminder,
+  columns = 2:ncol(gapminder),
+  mapping = aes(colour = continent)
+  )
+```
+
+## ggmaps
+
+Use Google Maps as background
+
+Need a free API key 
+
+```{r ggmap, message = FALSE, eval = TRUE}
+library(ggmap)
+dat <- tibble(Long = 18.5, Lat = -34)
+map <- get_googlemap(center = c(lon = 18.5, lat = -34), zoom = 11)
+g <- ggmap(map) +
+  geom_point(aes(x = Long, y = Lat), data = dat, size = 2) +
+  labs(x = "Longitude °E", y = "Latitude °N")
+```
+
+`center` can be vector giving longitude and latitude or an address
+
+##
+```{r print-ggmap, echo = FALSE, eval = TRUE}
+print(g)
+```
+
+Can add points, lines, polygons, etc.
+
+__Make a satellite map of your field area region__
+
+##Don't like cluttered google maps?
+
+Turn off selected elements
+```{r clean-ggmap, eval = FALSE, tidy=TRUE}
+map <- get_googlemap(
+  center = c(lon = 18.5, lat = -34), 
+  zoom = 10, 
+  maptype = "terrain", 
+  language = "en-EN", 
+  style = 'feature:road|visibility:off&
+    style=feature:administrative.locality|element:labels|visibility:off&
+    style=feature:landscape|visibility:on|saturation:-100|lightness:50&
+    style=feature:landscape|element:labels|visibility:off&
+    style=feature:poi|visibility:off&
+    style=feature:transit|visibility:off'
+)
+
+ggmap(map)
+```
+
+See https://developers.google.com/maps/documentation/static-maps/
