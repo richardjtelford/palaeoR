@@ -5,8 +5,8 @@ date: "September 29, 2019"
 output: ioslides_presentation
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```{r setup_regex, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Strings
@@ -86,7 +86,7 @@ stringr::str_extract(path, "GeoB\\d{4}-\\d")
 Makes writing complex regular expressions easy.
 
 New package  - not yet on CRAN
-```{r}
+```{r, eval = FALSE}
 devtools::install_github("VerbalExpressions/RVerbalExpressions")
 ```
 
@@ -112,7 +112,7 @@ Remove " [#/cm**3]" and " [#]" from the column names with one regular expression
 
 Use `names()` (or tidyverse solution with `rename_all`)
 
-```{r}
+```{r, eval = FALSE}
 names(GeoB8323_1) <- gsub(..., x = names(GeoB8323_1))
 ```
 replace the ... with your code. Watch out for special characters!

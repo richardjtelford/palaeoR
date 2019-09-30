@@ -130,7 +130,7 @@ x = 5
 
 ## Comments
 
-Use # to start comments.
+Use `#` to start comments.
 
 Help you and others to understand what you did
 

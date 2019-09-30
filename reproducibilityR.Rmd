@@ -1,0 +1,105 @@
+---
+title: "Reproducible and Open Science for Palaeoecology with R"
+author: 
+ name: "Richard J. Telford"
+ twitter: "richardjtelford"
+ company: "Dept. Biological Sciences, UiB"
+date: "January 30, 2019"
+output:
+  ioslides_presentation:
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# Why Reproducibility? {.section}
+
+## Why? 
+
+"Despite extensive efforts, we were not able to reconstruct where the error occurred. It probably resulted from using erroneously an earlier version of the analysis, or an issue with file naming."
+
+Many papers cannot be reproduced:
+
+- unclear methods?
+- error in code (whose)
+- error in data (especially hand-cleaned data)
+- misconduct (non-zero probability)
+
+
+## Basic idea
+
+- Data cleaning
+- Data formatting
+- Statistical analysis
+- Plotting
+- Putting numbers in the MS
+
+... all done with code. All reproducible.
+
+
+# Open Science
+
+## What is open science
+
+![open science](https://www.fosteropenscience.eu/sites/default/files/images/OpenScienceBuildingBlocks.JPG)
+
+[Read more](https://github.com/Open-Science-Training-Handbook/Open-Science-Training-Handbook_EN)
+
+## Open Data
+
+Archive raw data to suitable archive 
+
+ - [Neotoma](https://www.neotomadb.org/)
+ - [Pangaea.de](Pangaea.de) 
+ - [NCDC](https://www.ncdc.noaa.gov/data-access/paleoclimatology-data)
+
+What concerns do you have about archiving data? 
+
+What about archiving your code?
+
+
+
+
+
+# You need a style guide {.section}
+
+```{r child = "styleguide.Rmd"}
+```
+
+# Importing data {.section}
+
+```{r child = "data_importing.Rmd"}
+```
+
+
+# Tidyverse {.section}
+
+```{r child = "pipes.Rmd"}
+```
+
+## Tidyverse live coding
+
+# Regular expressions {.section}
+
+```{r child = "regular_expressions.Rmd"}
+```
+
+# Dates and times {.section}
+
+```{r child = "lubridate.Rmd"}
+```
+
+
+# Dependency management {.section}
+
+```{r child = "dependencyManagement.Rmd"}
+``` 
+
+## Resourses
+
+[Rstudio cheat sheets](https://rstudio.com/resources/cheatsheets/)
+
+[Rstudio education](https://education.rstudio.com/)

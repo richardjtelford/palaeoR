@@ -39,6 +39,9 @@ knitr::opts_chunk$set(echo = FALSE)
 * Diversity, rates of change
 * Trend detection
 
+## Class git repo
+
+[https://github.com/richardjtelford/palaeoR](https://github.com/richardjtelford/palaeoR)
 
 
 
