@@ -353,7 +353,7 @@ __Make a satellite map of your field area region__
 ##Don't like cluttered google maps?
 
 Turn off selected elements
-```{r clean-ggmap, eval = FALSE, tidy=TRUE}
+```{r clean-ggmap, eval = TRUE, tidy=TRUE}
 map <- get_googlemap(
   center = c(lon = 18.5, lat = -34), 
   zoom = 10, 
@@ -366,7 +366,10 @@ map <- get_googlemap(
     style=feature:poi|visibility:off&
     style=feature:transit|visibility:off'
 )
+```
 
+##
+```{r}
 ggmap(map)
 ```
 
