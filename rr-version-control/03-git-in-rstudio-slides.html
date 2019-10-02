@@ -131,48 +131,42 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>Follow along demo</h2></hgroup><article  id="follow-along-demo">
 
-<p><strong>Step 1:</strong> Fork the <a href='https://github.com/Reproducible-Science-Curriculum/rr-version-control-demo' title=''><code>rr-version-control-demo</code></a> repository.</p>
+<p><strong>Step 1:</strong> Open your <code>palaeo_R</code> project in rstudio</p>
 
-<p><strong>Step 2:</strong> Clone your forked repository to obtain a local copy of the files into an RStudio project.</p>
+<p><strong>Step 2:</strong> Configure rstudio.</p>
 
-<p><strong>Step 3:</strong> Edit a file in this repository/project.</p>
+<p>tools &gt;&gt; Global Options &gt;&gt; Git/SVN &gt;&gt; Create RSA key</p>
 
-<p><strong>Step 4:</strong> Stage your changes to be committed.</p>
+<p>Copy key and go to github.com</p>
 
-<p><strong>Step 5:</strong> View the diff, and commit your changes, with a commit message.</p>
+<p>go to settings (under user icon) &gt;&gt; security</p>
 
-<p><strong>Step 6:</strong> Push your changes to your own fork of the the <code>rr-version-control-demo</code> GitHub repository.</p>
+<p>Paste rsa key</p>
 
-</article></slide><slide class=""><hgroup><h2>Step 1: Fork</h2></hgroup><article  id="step-1-fork">
+<p><strong>Step 3</strong> Configure git</p>
 
-<p><strong>Fork the <a href='https://github.com/Reproducible-Science-Curriculum/rr-version-control-demo' title=''><code>rr-version-control-demo</code></a> repository.</strong></p>
+<pre class = 'prettyprint lang-r'>usethis::use_git_config(user.name = &quot;Jane Doe&quot;, user.email = &quot;jane@example.com&quot;)</pre>
 
-<p><br></p>
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
 
-<ol>
-<li>Go to the repository at <a href='https://github.com/Reproducible-Science-Curriculum/rr-version-control-demo' title=''>https://github.com/Reproducible-Science-Curriculum/rr-version-control-demo</a>.</li>
-<li>Click on Fork (on the top right corner).</li>
-</ol>
+<p><strong>Step 4:</strong> Use the <code>usethis</code> package to add git to your project</p>
 
-<p><br><br></p>
+<pre class = 'prettyprint lang-r'>usethis::use_git()# initiates a local git repo
+usethis::use_github()# creates repo on github</pre>
 
-<p><em>Now you have a copy of <code>rr-version-control-demo</code> repository in your account, woohoo!</em></p>
+<p>Now restart rstudio.</p>
 
-</article></slide><slide class=""><hgroup><h2>Aside: Where am I?</h2></hgroup><article  id="aside-where-am-i">
+<p>This should have made a local repo and a copy on github. Should be a new Git tab in rstudio with solid green arrows. Some troubleshooting may be required.</p>
 
-<p><strong>How can I tell if I am looking at my fork or the original repository?</strong></p>
+<p>You only need to do this once per project.</p>
 
-<ul>
-<li>Look at the URL.</li>
-<li>Look at the name of the repo on the upper left corner, for your fork it will say:</li>
-</ul>
+</article></slide><slide class=""><hgroup><h2>Cloning</h2></hgroup><article  id="cloning">
 
-<pre >[your-github-name]/rr-version-control-demo
-forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
+<p>Can also clone projects already on github with</p>
 
-</article></slide><slide class=""><hgroup><h2>Step 2: Clone</h2></hgroup><article  id="step-2-clone">
+<p><code>usethis::create_from_github</code></p>
 
-<p><strong>Clone your forked repository to obtain a local copy of the files .</strong></p>
+<p>or with file &gt;&gt; new project</p>
 
 <p><br></p>
 
@@ -188,18 +182,7 @@ forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
 </ul></li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Step 3: Edit</h2></hgroup><article  id="step-3-edit">
-
-<p><strong>Edit a file in this repository/project.</strong></p>
-
-<p><br></p>
-
-<ol>
-<li>Open the file called <code>gdp-life-expectancy.Rmd</code> and knit.</li>
-<li>Change the <code>analysis_year</code> to another year for which we have data (1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, 2002, 2007), and knit again. Examine the output for changes.</li>
-</ol>
-
-</article></slide><slide class=""><hgroup><h2>Step 4: Stage</h2></hgroup><article  id="step-4-stage">
+</article></slide><slide class=""><hgroup><h2>Step 5: Stage</h2></hgroup><article  id="step-5-stage">
 
 <p><strong>Stage your changes to be committed.</strong></p>
 
@@ -207,14 +190,14 @@ forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
 
 <ol>
 <li>Go to the Git pane in RStudio.</li>
-<li>Stage the changes for <code>gdp-life-expectancy.Rmd</code> and <code>gdp-life-expectancy.html</code> by checking the boxes next to then, and hit Commit.</li>
+<li>Stage the one or more of your code files by checking the boxes next to then, and hit Commit.</li>
 </ol>
 
 <p><br><br></p>
 
 <p><em>Don&#39;t worry about the other files that appear in this pane, we&#39;ll get to them in a bit.</em></p>
 
-</article></slide><slide class=""><hgroup><h2>Step 5: Commit</h2></hgroup><article  id="step-5-commit">
+</article></slide><slide class=""><hgroup><h2>Step 6: Commit</h2></hgroup><article  id="step-6-commit">
 
 <p><strong>View the diff, and commit your changes, with a commit message.</strong></p>
 
@@ -227,7 +210,7 @@ forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
 
 </article></slide><slide class=""><hgroup><h2>Step 6: Push</h2></hgroup><article  id="step-6-push">
 
-<p><strong>Push your changes to your own fork of the the <code>rr-version-control-demo</code> GitHub repository.</strong></p>
+<p><strong>Push your changes to your GitHub repository.</strong></p>
 
 <p><strong>push</strong>: When using git push always means pushing commits from your local respository (your computer) to a remote repository (Github).</p>
 
@@ -241,6 +224,12 @@ forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
 <p><br><br></p>
 
 <p><em>Getting an error? Can&#39;t push? See <a href='https://github.com/jennybc/stat540_2014/blob/master/seminars/seminar92_git.md' title=''>here</a> under GitHub password.</em></p>
+
+</article></slide><slide class=""><hgroup><h2>Make an edit</h2></hgroup><article  id="make-an-edit">
+
+<p>Now edit the file you pushed.</p>
+
+<p>Use the Diff button on the Git pane to see what changed</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Other day one essentials</h2></hgroup><article  id="other-day-one-essentials">
 
@@ -266,13 +255,10 @@ forked from Reproducible-Science-Curriculum/rr-version-control-demo</pre>
 <li><p>Red: removed text</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>What&#39;s in my Git pane?</h2></hgroup><article  id="whats-in-my-git-pane">
+</article></slide><slide class=""><hgroup><h2>.gitignore?</h2></hgroup><article  id="gitignore">
 
 <ul>
-<li><p>When you cloned your repo into an RStudio project you got two bonus files that weren&#39;t there before: <code>.gitignore</code> and <code>.rr-version-control-demo.Rproj</code></p></li>
-<li><p>They&#39;re both showing up as <strong>untracked</strong> since Git hasn&#39;t seen them before. You can stage, commit, and push those files to your repository.</p></li>
-<li><p><code>.rr-version-control-demo.Rproj</code>: This file maintains metadata on the R project.</p></li>
-<li><p><code>.gitignore</code>: Git uses this file to determine which files and directories to ignore, before you make a commit.</p></li>
+<li><code>.gitignore</code>: Git uses this file to determine which files and directories to ignore, before you make a commit.</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Reading</h2></hgroup><article  id="reading">

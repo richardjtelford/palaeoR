@@ -47,10 +47,10 @@ Paste rsa key
 usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.com")
 ```
 
-
+##
 **Step 4:** Use the `usethis` package to add git to your project
 
-```{r}
+```{r eval = FALSE}
 usethis::use_git()# initiates a local git repo
 usethis::use_github()# creates repo on github
 ```
