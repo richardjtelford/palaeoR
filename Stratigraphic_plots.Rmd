@@ -1,0 +1,50 @@
+---
+title: "Stratigraphic diagrams and zoneation"
+author: "Richard J. Telford"
+date: "October 1, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Neotoma
+
+The [Neotoma database](http://apps.neotomadb.org/explorer/) includes much pollen data. Zoom in so the map just covers Africa. In the Advanced search tab, select dataset type = Pollen and set Space >> Search by extent >> current map extent. Click search to see African Pollen data in Neotoma.
+
+Click on a site of interest and note the dataset ID.
+
+Use the `neotoma` R package to download this dataset with `get_download`.
+
+Use the `counts` function to extract the pollen counts (Note, your download will be a list (with only one element), and you need to specify that you want the first element with `my_download[[1]]`).
+
+Extract the sample.meta data for your site with the `$` notation and use `bind_rows` to merge this with the count data.
+
+Extract the taxon list for your site with the `$` notation. This will give information about each taxa.
+
+Use `pivot_longer` to make the count data into a long format and `left_join` this to the taxon list. If there is an "alias" column in the taxon list, join by this, otherwise join by the taxon.name.
+
+Filter the data so that the variable.element is one of "pollen" or "spores"  (hint `%in%`).
+
+Calculate percent. 
+
+Use `select` to remove unnecessary columns (keep age, depth, taxon, percent), then use `pivot_wider` to make the data into a wide format. Use `select` to split the data into the pollen data and the meta data.
+
+Make a stratigraphic plot with `rioja::strat.plot`. Build the plot slowly.
+
+Run a constrained cluster analysis with `rioja::chclust` on the chord distances. Decide how many zones are necessary with `rioja::bstick`. Include the cluster diagram in the stratigraphy, and use `rioja::addClustZone` to add the zone boundaries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
