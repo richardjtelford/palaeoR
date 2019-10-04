@@ -1,0 +1,168 @@
+---
+title: "Palaeoenvironmental reconstructions"
+author: "Richard J. Telford"
+date: "October 14, 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, message = FALSE)
+```
+
+## Setup
+
+Transfer functions for palaeoenvironmental reconstructions can be fitted with the `rioja` or `analogue` packages in R. Other packages such as `vegan` and `palaeoSig` can help interpretation.
+
+Download and install these packages with `install.packages()`
+
+```{r, eval = FALSE}
+# install.packages("rioja")
+# install.packages("analogue")
+# install.packages("palaeoSig")
+# install.packages("vegan")
+# install.packages("tidyverse")#for ggplot etc
+# install.packages("devtools")
+# devtools::install_github("gavinsimpson/ggvegan")
+# devtools::install_github("richardjtelford/ggpalaeo")
+```
+This needs doing only once. The packages need loading into R every session with the command `library`.
+
+```{r}
+library("rioja")
+library("palaeoSig")
+library("tidyverse")
+library("ggvegan")
+library("ggpalaeo")
+```
+
+Packages `rioja` and `analogue` have functions with the same names - don't load both at the same time.
+
+```{r}
+set.seed(42)#ensures results are same every time
+```
+## Data
+
+For convenience, we are going to use some of the datasets available within the `rioja` package.
+
+```{r}
+#NB any text after a '#' is a comment and ignored by R 
+#get help on any function with '?function_name' 
+data("SWAP")#SWAP calibration set
+data("RLGH")#fossil data from the Round Loch of Glenhead
+```
+
+This has imported the data in lists. We can break these up into their component parts to simplify the code later.
+
+```{r}
+# '<-' assigns the result on the right to the name on the left
+# '$' extracts a named component of a list
+spp <- SWAP$spec
+pH <- SWAP$pH
+spNames <- SWAP$names
+
+fos <- RLGH$spec
+ageDepth <- RLGH$depths
+```
+
+## Species-environement relationships 
+
+Plot calibration set species abundances against pH. Add a smoother to highlight the main trends.
+
+```{r}
+ggplot(spp/100, aes(x = pH, y = TA003A)) + 
+  geom_point() +
+  geom_smooth(method = "gam", method.args = list(family = "quasibinomial"))
+
+```
+
+The relationship between all species and the environment can be seen with an ordination.
+
+```{r}
+ord <- cca(sqrt(spp) ~ pH)
+ord
+autoplot(ord)
+#learn more about ordinations in Bio303
+```
+
+
+## Fit a transfer function
+
+
+```{r, eval = FALSE}
+mod <- WA(y = sqrt(spp), x = pH)
+#crossvalidate
+mod <- crossval(mod)
+performance(mod)
+```
+```{r, echo = FALSE, include = FALSE}
+mod <- WA(y = sqrt(spp), x = pH)
+#crossvalidate
+mod <- crossval(mod)
+```
+```{r, echo = FALSE}
+performance(mod)
+```
+**Question:** do any of the other transfer function methods perform better - try WAPLS, MAT, MLRC? Look only at the cross-validated performance. 
+
+By default `crossval` uses leave-one-out cross-validation. Bootstrap cross-validation is also useful as it gives sample specific errors. Other forms of cross-validation are appropriate if there is pseudoreplication or autocorrelation.
+
+## Plot a stratigraphic plot of the fossil data
+
+```{r}
+strat.plot(d = fos, yvar = ageDepth$Age, scale.percent = TRUE, y.rev = TRUE)
+```
+
+## Apply the transfer function
+
+```{r}
+recon <- predict(mod, sqrt(fos))
+tibble(age = ageDepth$Age, pH = recon$fit[, "WA.inv"]) %>% 
+  ggplot(aes(x = age, y = pH)) + 
+  geom_line()
+```
+
+## Diagnostics & checks
+
+Several diagnostics available - goodness of fit, distance to closest analogue - in `analogue` package.
+
+Timetrack of fossil samples in calibration set ordination
+```{r}
+#use 'analogue::' to access functions without loading library - prevents name conflicts with rioja
+tt <- analogue::timetrack(X = sqrt(spp), passive = sqrt(fos), env = pH) 
+plot(tt)
+```
+
+Residual length to constraining ordination axis
+```{r}
+rlen <- analogue::residLen(X = sqrt(spp), env = pH, passive = sqrt(fos))
+
+plot(rlen)
+
+autoplot(rlen, df = ageDepth, x_axis = "Age") +
+labs(x = "Age", y = "Squared residual distance", fill = "Goodness of fit")
+```
+Colours show how good the fit is.
+
+Analogue distances
+
+```{r}
+AD <- analogue_distances(spp, fos)
+autoplot(AD, df = ageDepth, x_axis = "Age") +
+ labs(y = "Squared-chord distance", x = "Age")
+```
+
+
+Significance tests in `palaeoSig`.
+
+```{r}
+tst1 <- randomTF(spp = sqrt(spp), env = pH, fos = sqrt(fos), n = 99, col = 1, fun = WA)
+tst1$sig
+autoplot(tst1)
+```
+
+## Further reading
+
+Juggins and Birks (2012) Quantitative Environmental Reconstructions from Biological Data. In _Tracking Environmental Change Using Lake Sediments, Data Handling and Numerical Techniques_ https://www.springer.com/gp/book/9789400727441
+
+
+

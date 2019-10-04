@@ -1,0 +1,125 @@
+---
+title: "Chronologies Practical: Radiocarbon dating & proxy correlation"
+author: "Richard J. Telford"
+date: "October 16, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+library(rbacon)
+library(tidyverse)
+```
+
+#Part One: Installation of Bacon and run test example.
+
+1) Download and install R and Rstudio
+2) Make a new project (File > New Project). This helps keep track of files and working directories.
+3) Install `rbacon` package with `install.packages("rbacon")`
+4) Load the `rbacon` package with `library(rbacon)`. Also load the `tidyverse` package for `ggplot` etc.
+5) Run the command `Bacon()` to make an age-depth model for the ^14^C dates on the default core MSB2K. Answer "y" to the questions.
+6) This will take a a few minutes (depending on how fast your computer is). When it is finished, run `agedepth()` to create a plot. 
+The first plot indicates how well the Monte Carlo procedure has converged – you want this to resemble a hairy caterpillar (white noise). 
+The second and third plots show the prior (green) and posterior (grey) for the sedimentation rate and memory respectively.
+The main panel shows the calibrated ^14^C dates (blue) and the age depth model, where darker greys indicate more likely ages. A red line picks out the most likely age for each depth. 
+
+7) Run `proxy.ghost()` to see the proxies with chronological uncertainty.
+
+
+#Part two: 
+
+El Bilali et al (2013) report $\delta^{18}O$ of Sphagnum cellulose for most of the Holocene and find a correlation with solar activity. We want to test this.
+
+Start by fitting an age-depth model for the cellulose data
+
+7) `Bacon` is very particular and idiosyncratic about how it expects to find data. Read the manual for more details. Put the file "cellulose.dates.csv"" into the directory "chronology_practical/cellulose.dates" inside the directory where your project file is.
+8) Now run 
+```{r, eval = FALSE}
+Bacon("cellulose.dates", thick = 10, coredir = "chronology_practical/")
+```
+Answer "y" at the prompt. The argument thick sets the thickness of the sections that bacon uses. 5 is the default, but takes too long with this core.
+9) This is a good time for a cup of coffee. R will estimate how long you have to drink it!
+10) Examine the age-depth plot and check for convergence.
+11) Bacon will put some output files into the data directory. These include the mean ages in the file "cellulose.dates_57_ages.txt". Load this file with the command 
+
+```{r}
+ageDepth <- read.table("chronology_practical/cellulose.dates/cellulose.dates_57_ages.txt", header = TRUE)
+```
+
+11) Now we need to import the proxy data and put it onto the age scale. Import the proxy data with 
+```{r}
+proxy <- read.csv("chronology_practical/cellulose.dates/cellulose.csv")
+```
+Run `summary(proxy)` to get some more information about the data.
+12) We can find the date for each depth at which we have proxy data with 
+```{r}
+proxy$age <- approx(x = ageDepth$depth, y = ageDepth$wmean, xout = proxy$Depth)$y 
+```
+
+There are alternatives ways to code this.
+
+13) Now we can plot the proxy against age 
+```{r}
+ggplot(proxy, aes(x = age, y = d18O)) +
+  geom_points()
+```
+
+
+#Part three: find the correlation between the cellulose data and Total solar irradiation (TSI)
+
+14) Now import the ^10^Be-inferred TSI data with 
+```{r}
+tsi <- read.csv("chronology_practical/cellulose.dates/bard et al 2003.csv") 
+```
+and run `summary(tsi)`.
+
+15) Now we need to interpolate both the cellulose and tsi data so we have the data on a common timescale.
+```{r}
+combined.ages <- sort(c(proxy$age, 1950 - tsi$Year))
+```
+We subtract the `tsi$Year` from 1950 to convert to 1950 BP. 
+
+```{r}
+proxy.new <- approx(x = proxy$age, y = proxy$d18O, xout = combined.ages)
+
+tsi.new <- approx(x = 1950 - tsi$Year, y = tsi$ Geomag.corr.Yang.TSI.W.m2, xout = combined.ages)
+```
+
+16) Now we need to plot the two data sets.
+
+```{r}
+plot(proxy.new,  xlim = c(-50,1200),  type = "l")
+plot(tsi.new,  xlim = c(-50, 1200), type = "l")
+```
+
+17) Now we can calculate the correlation between the two record with 
+```{r}
+cor(proxy.new$y, tsi.new$y, use = "complete")
+```
+NB this is not the same age depth model that the original authors used and is using more data
+
+#Part four: Correlation across an ensemble of age depth models (I don’t expect that you will get this far)
+
+18) The age-depth model used above is the mean of the many iterations of the Monte Carlo procedure used in the Bayesian age depth modelling procedure. The estimated ages from each fun can be extracted for 2cm depth with `ages.d2 <- Bacon.Age.d(2, BCAD = FALSE)`
+
+We can extract ages from each depth in turn with a loop
+`ensemble <- sapply(proxy$Depth, Bacon.Age.d)` each row of the output matrix contains one age-depth model.
+
+19) Plot the first 50 models with matplot(proxy$Depth, t(ensemble[1:50,]), type = "l")
+
+20) Now we can calculate the correlation between the proxy and TSI across the ensemble, again with a loop
+```{r}
+result <- apply(ensemble,1, function(proxy.age){
+  combined.ages <- sort(c(proxy.age, 1950 - tsi$Year)) 
+  proxy.new <- approx(x=proxy.age, y = proxy$d18O, xout = combined.ages)
+  tsi.new <- approx(x = 1950 - tsi$Year, y = tsi$ Geomag.corr.Yang.TSI.W.m2, xout = combined.ages)
+  cor(proxy.new$y, tsi.new$y, use = "complete")
+})
+hist(result)
+```
+
+Next step would be to simulate proxies with the same persistence time as the original data and repeat the correlation analysis with these and test if the observed data has higher correlations than most of the simulate proxies.
+
+
+
+El Bilali et al (2013) A Holocene paleoclimate reconstruction for eastern Canada based on $\delta^{18}O$ cellulose of Sphagnum mosses from Mer Bleue Bog. _The Holocene_ **23**, 1260–1271 https://carleton.ca/timpatterson/wp-content/uploads/Bilali2013.23.1260-1271.pdf
