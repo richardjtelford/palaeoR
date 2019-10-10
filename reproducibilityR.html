@@ -154,6 +154,95 @@ slide:not(.current) .plotly.html-widget{
 
 <p>What about archiving your code?</p>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Use an Integrated Development Environment</h2></hgroup><article  id="use-an-integrated-development-environment">
+
+</article></slide><slide class=""><hgroup><h2>Why</h2></hgroup><article  id="why-1">
+
+<p>A good IDE makes R coding more efficient and reduces some types of bugs</p>
+
+<ul>
+<li>Bracket matching</li>
+<li>Autocomplete of function/variable names</li>
+<li>Integrated help</li>
+<li>Project management and version control</li>
+<li>Help debugging</li>
+<li>integration with Rmarkdown</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Choices</h2></hgroup><article  id="choices">
+
+<ul>
+<li>Tinn-R (Windows only)</li>
+<li>RKWard</li>
+<li>emacs</li>
+<li><strong>RStudio</strong> <a href='https://www.rstudio.com' title=''>rstudio.com</a></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Demonstration</h2></hgroup><article  id="demonstration">
+
+<ul>
+<li>Autocompletion</li>
+<li>Bracket matching</li>
+<li>Code formatting</li>
+<li>alt-shift-k to get shortcuts</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Project management</h2></hgroup><article  id="project-management">
+
+<p>Use Rstudio projects for project management</p>
+
+<ul>
+<li>Keeps related files together</li>
+<li>Keeps track of working directory, history and environment</li>
+<li>Integration with version control</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Use relative paths</h2></hgroup><article  id="use-relative-paths">
+
+<p><code>read_table(&quot;data/myfile.txt&quot;)</code> # good</p>
+
+<p><code>read_table(&quot;c:/projects/myProject/mysubproject/mysubsubsubproject/myfolderwithaverylongname/data/myfile.txt&quot;)</code> # bad</p>
+
+<p>Or, better, use <code>here</code> package</p>
+
+<pre class = 'prettyprint lang-r'>library(&quot;here&quot;)
+read_table(here(&quot;data/myfile.txt&quot;))#makes code independent of rstudio</pre>
+
+</article></slide><slide class=""><hgroup><h2>Setting R-studio up</h2></hgroup><article  id="setting-r-studio-up">
+
+<p>Don&#39;t save/restore workspace</p>
+
+<p><code>Tools &gt;&gt; Global Options &gt;&gt; General</code></p>
+
+<ul>
+<li><code>Save workspace to .Rdata on exit -&gt; Never</code></li>
+<li><code>Restore .Rdata into workspace on startup -&gt; OFF</code></li>
+</ul>
+
+<p>Word-wrap</p>
+
+<p><code>Tools &gt;&gt; Global Options &gt;&gt; Code &gt;&gt; soft-wrap R source files</code></p>
+
+</article></slide><slide class=""><hgroup><h2>Exercise</h2></hgroup><article  id="exercise">
+
+<p>Set up an Rstudio project called <code>palaeo_R</code></p>
+
+<p>We will use this project all week.</p>
+
+<p>Open a new script and start to <strong>type</strong> some code</p>
+
+<pre class = 'prettyprint lang-r'>library(&quot;tidyverse&quot;)
+set.seed(42) # make reproducible
+df &lt;- tibble(#a tibble is a better data.frame - compare
+  x = 1:10,
+  y = rnorm(10)
+)
+
+ggplot(df, aes(x = x, y = y)) + 
+  geom_point()</pre>
+
+<p>Become familiar with the autocomplete, sending code to the console and some shortcuts</p>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>You need a style guide</h2></hgroup><article  id="you-need-a-style-guide" class="section">
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
@@ -172,7 +261,7 @@ The only way to write good code is to write tons of shitty code first. Feeling s
 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-</article></slide><slide class=""><hgroup><h2>Why</h2></hgroup><article  id="why-1">
+</article></slide><slide class=""><hgroup><h2>Why</h2></hgroup><article  id="why-2">
 
 <ul>
 <li>Makes code easier to read</li>
@@ -352,7 +441,7 @@ g2</pre>
 
 <p>Hadley Wickham, H. Style Guide <em>Advanced R</em> <a href='http://adv-r.had.co.nz/Style.html' title=''>http://adv-r.had.co.nz/Style.html</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Exercise</h2></hgroup><article  id="exercise">
+</article></slide><slide class=""><hgroup><h2>Exercise</h2></hgroup><article  id="exercise-1">
 
 <p>Take some of your existing R code and reformat it according to these style guides.</p>
 
@@ -649,7 +738,9 @@ dmy_hms(dat)</pre>
 
 <p><a href='https://rstudio.com/resources/cheatsheets/' title=''>Rstudio cheat sheets</a></p>
 
-<p><a href='https://education.rstudio.com/' title=''>Rstudio education</a></p></article></slide>
+<p><a href='https://education.rstudio.com/' title=''>Rstudio education</a></p>
+
+<p><a href='https://stat545.com/' title=''>stat545.com</a> Data wrangling, exploration, and analysis with R <a href='https://stat545.com/' title=''>stat545.com</a></p></article></slide>
 
 
   <slide class="backdrop"></slide>

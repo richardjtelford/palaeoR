@@ -63,41 +63,41 @@ What about archiving your code?
 
 # Use an Integrated Development Environment
 
-```{r child = "useAnIDE.Rmd"}
+```{r child = "child_rmd/useAnIDE.Rmd"}
 ```
 
 # You need a style guide {.section}
 
-```{r child = "styleguide.Rmd"}
+```{r child = "child_rmd/styleguide.Rmd"}
 ```
 
 # Importing data {.section}
 
-```{r child = "data_importing.Rmd"}
+```{r child = "child_rmd/data_importing.Rmd"}
 ```
 
 
 # Tidyverse {.section}
 
-```{r child = "pipes.Rmd"}
+```{r child = "child_rmd/pipes.Rmd"}
 ```
 
 ## Tidyverse live coding
 
 # Regular expressions {.section}
 
-```{r child = "regular_expressions.Rmd"}
+```{r child = "child_rmd/regular_expressions.Rmd"}
 ```
 
 # Dates and times {.section}
 
-```{r child = "lubridate.Rmd"}
+```{r child = "child_rmd/lubridate.Rmd"}
 ```
 
 
 # Dependency management {.section}
 
-```{r child = "dependencyManagement.Rmd"}
+```{r child = "child_rmd/dependencyManagement.Rmd"}
 ``` 
 
 ## Resourses
@@ -105,3 +105,5 @@ What about archiving your code?
 [Rstudio cheat sheets](https://rstudio.com/resources/cheatsheets/)
 
 [Rstudio education](https://education.rstudio.com/)
+
+[stat545.com](https://stat545.com/) Data wrangling, exploration, and analysis with R [stat545.com](https://stat545.com/)

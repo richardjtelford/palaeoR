@@ -12,7 +12,7 @@ output:
 
 
 ```{r setup-IDE, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Why
@@ -56,7 +56,7 @@ Use Rstudio projects for project management
  
 Or, better, use `here` package
 
-```{r}
+```{r here, eval = FALSE}
 library("here")
 read_table(here("data/myfile.txt"))#makes code independent of rstudio
 ```
