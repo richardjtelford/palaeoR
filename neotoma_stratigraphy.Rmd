@@ -1,0 +1,209 @@
+---
+title: "Untitled"
+author: "Richard J. Telford"
+date: "October 9, 2019"
+output: 
+  html_document:
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Last week I gave a course on [R for palaeoecologists](https://github.com/richardjtelford/palaeoR) covering data handling using `tidyverse`, reproducibility and some some ordinations and transfer functions. One of the exercises was to download some pollen data from [Neotoma](https://www.neotomadb.org/) and make a pollen diagram. This is my solution. It uses a lot of `tidyverse`. Everything could be done with base R, but I find `tidyverse` more expressive.
+
+```{r, load-packages, message = FALSE}
+#load packages
+library("tidyverse")
+library("neotoma")
+library("rioja")
+#devtools::install_github("richardjtelford/ggpalaeo") #NEW VERSION
+library("ggpalaeo") #Need new version
+```
+
+I've chosen to plot the pollen data from [Lake Bambili](http://apps.neotomadb.org/Explorer/?datasetid=40940). First we need to download the data with the neotoma package
+
+```{r download-data, cache = TRUE}
+#download data
+get_dataset(40940)#check correct site
+bambili_raw <- get_download(40940)
+eco_types <- get_table("EcolGroupTypes")
+```
+
+Then we need to extract the components we need from the downloaded data. `get_download` returns a list with one element per dataset which we can extract with the `$` notation.
+
+```{r extract}
+#extract components
+cnts <- counts(bambili_raw$`40940`) #table of counts
+meta <- bambili_raw$`40940`$sample.meta #sample depths/ages
+taxa <- bambili_raw$`40940`$taxon.list %>% #taxon info
+  mutate_all(as.character) #convert everything from a factor to prevent warnings later
+```
+
+I want to add the age/depth information to the counts. Here I am using `bind_cols` to do this, which assumes the rows are in the same order. The paranoid might want to convert the row names of the counts into a column (`rownames_to_column`) and then join on sample.id. Next I use `pivot_longer` (the replacement of `tidyr::gather`) to convert the data from an species x samples data.frame to a long format, and join to the taxon information. Note that some datasets have a alias column in taxon.list and you need to join by that instead.
+
+```{r joins}
+bambili <- meta %>% select(age, depth) %>% 
+  bind_cols(cnts) %>% 
+  pivot_longer(cols = -c("age", "depth"), names_to = "species", values_to = "count") %>% 
+  left_join(taxa, by = c("species" = "taxon.name"))
+```
+
+Now is a good time to check what we have. It's useful to have the [Neotoma database manual](https://www.neotomadb.org/uploads/NeotomaManual.pdf) open to check what terms mean. 
+
+```{r check-variable.element}
+bambili %>% count(variable.element)
+```
+
+variable.element contains just pollen and spores. It can include a variety of other things (such as stomata) that we might want to filter out.
+
+```{r check-ecological.types}
+eco_types %>% 
+  semi_join(bambili, by = c("EcolGroupID" = "ecological.group")) %>%
+  select(EcolGroupID, EcolGroup) 
+```
+
+I don't want to include the AQVP or UNID in the diagram. I'm not sure about SEED.
+
+```{r}
+bambili %>% filter(ecological.group == "SEED", count > 0) %>% 
+  select(species, count) %>% 
+  group_by(species) %>% 
+  summarise(n = n(), max = max(count))
+```
+
+So SEED is an unidentified monocot present at low abundances. I'm going to delete it.
+
+```{r zap-eco-groups}
+#remove unwanted variable.element/ecological.group
+
+bambili <- bambili %>% 
+  filter(!ecological.group %in% c("AQVP", "UNID", "SEED"))
+#use `%in%` not `==`
+```
+
+This is a good time to check the count sums. It might be prudent to delete any samples with very low counts.
+
+```{r countsums}
+#check count sums
+bambili %>% 
+  group_by(depth) %>% 
+  summarise(s = sum(count)) %>% 
+  arrange(s) %>% 
+  slice(1:5)
+```
+Seventy four isn't great, but I'm going to keep it.
+
+Now we can calculate percent and remove the rare taxa 
+```{r}
+
+#calculate percent
+bambili <- bambili %>% 
+  group_by(depth) %>% 
+  mutate(percent = count/sum(count) * 100) 
+
+#remove rare taxa
+bambili1 <- bambili %>% 
+  group_by(species) %>% 
+  filter(
+    sum(percent > 0) >= 3, #must be in at least three samples
+    max(percent) > 3) #must have a max percent > 3
+```
+
+Now we can use `pivot_wider` to reshape the data back into a species x samples data.frame that we can plot with `rioja::strat.plot`. For convenience, I'm separating the species data from the age/depth data.
+
+```{r pivot-wider}
+bambili2 <- bambili1 %>% 
+  select(age, depth, species, percent) %>% 
+  pivot_wider(names_from = "species", values_from = "percent")
+
+bambili_spp <- bambili2 %>% select(-age, -depth) %>% 
+  as.data.frame()#needed as strat.plot does not like tibble - pull request to fix this submitted.
+```
+
+Now we can plot the stratigraphy. 
+```{r basic-plot}
+#strat.plot
+strat.plot(bambili_spp, yvar = bambili2$depth)
+```
+
+There are a variety of aspects of this plot that need improving. We need to:
+
+- need to plot on constant scale for all taxa
+- reverse y axis so deeper levels are lower
+- arrange the taxa in some logical order
+- rotate the species names and set the figure margins
+- add a cluster diagram and zones
+- add a secondary scale
+
+Some of these can be fixed by setting an argument in `strat.plot` (there are a lot of arguments - see `?strat.plot`), but to reorder the species, we need to reprocess the data.
+
+
+```{r}
+bambili2 <- bambili1 %>% 
+  mutate(
+    #make ecological.group a factor with TRSH first
+    ecological.group = factor(ecological.group, levels = c("TRSH", "UPHE", "VACR")),
+    mean_percent = mean(percent)) %>% 
+  #arrange by ecological.group and mean_percent (largest first)
+  arrange(ecological.group, desc(mean_percent)) %>% 
+  ungroup() %>%
+  #make species into a factor so we can perserve the order
+  mutate(species = factor(species, levels = unique(species)))
+
+#reshape using tidyr::spread as pivot_wider (currently?) ignores factor order
+bambili3 <- bambili2 %>% 
+  select(age, depth, species, percent) %>% 
+  spread(key = "species", value = "percent")
+
+bambili_spp <- bambili3 %>% 
+  select(-age, -depth) %>%
+  as.data.frame(bambili_spp) 
+
+
+#set up for ecological group colours
+ecological_groups <- bambili2 %>% distinct(species, ecological.group) %>% pull(ecological.group)
+ecological_colours <- c("red", "green", "orange")
+```
+
+And we run a constrained cluster analysis
+```{r clust}
+bambili_dist <- dist(sqrt(bambili_spp/100))#chord distance
+clust <- chclust(bambili_dist, method = "coniss")
+#bstick(clust)#five groups
+```
+
+Now we can make a better plot.
+```{r better-plot}
+#set up mgp (see ?par) 
+mgp <- c(2, 0.25, 0)
+par(tcl = -0.15, mgp = mgp)#shorter axis ticks - see ?par
+pt <- strat.plot(
+  d = bambili_spp, 
+  yvar = bambili3$depth,
+  y.rev = TRUE, #reverse direction of y-axis
+  scale.percent = TRUE, #use constant scale for all taxa
+  srt.xlabel = 45, #rotate x-label by 45 degrees
+  cex.xlabel = 0.8, #smaller font
+  mgp = mgp,
+  xRight = 0.98, #right margin
+  xLeft = 0.21, #left margin with space for 2nd axis
+  yTop = 0.60, #top margin
+  yBottom = 0.1, #bottom margin
+  col.line = ecological_colours[ecological_groups],#colours
+  col.bar = ecological_colours[ecological_groups], #colours
+  ylabel = "Depth cm", 
+  clust = clust
+  )
+
+#add zone boundaries
+addClustZone(pt, clust = clust, nZone = 5)
+
+#add a secondary scale
+secondary_scale(pt, yvar = bambili3$depth, yvar2 = bambili3$age, ylabel2 = "Date yr BP", n = 10)
+```
+
+It's beginning to get there. There are probably too many taxa plotted. Merging the various `Polypodiophyta` as the names are very long and the ecological interpretation of the different types is unclear. I also want to reduce the space between the y-axis and the ylabel. Unfortunately this is hard coded in `strat.plot` but it would only take a minute to make it into an argument. I'd also like to add a % sign to to the axis, but I cannot see an argument that will do that (again it shouldn't be hard to code - adding yet another argument).
+
+I would like to have some text on top describing the ecological groups, but I have the feeling that that would be very difficult to do.
