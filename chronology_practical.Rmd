@@ -61,7 +61,7 @@ There are alternatives ways to code this.
 13) Now we can plot the proxy against age 
 ```{r}
 ggplot(proxy, aes(x = age, y = d18O)) +
-  geom_points()
+  geom_point()
 ```
 
 
