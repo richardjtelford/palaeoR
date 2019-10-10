@@ -61,8 +61,10 @@ What concerns do you have about archiving data?
 What about archiving your code?
 
 
+# Use an Integrated Development Environment
 
-
+```{r child = "useAnIDE.Rmd"}
+```
 
 # You need a style guide {.section}
 
