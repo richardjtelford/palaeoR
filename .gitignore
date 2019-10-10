@@ -38,3 +38,16 @@ rsconnect/
 #temporary excel files
 *.xls#
 .Rproj.user
+
+#html of child docs
+child_rmd/*.html
+
+# R markdown output "_files" directory
+*_files/*
+
+# bibtek backup
+*.bak
+
+# bacon output files
+*.bacon
+
