@@ -41,7 +41,7 @@ taxa <- bambili_raw$`40940`$taxon.list %>% #taxon info
   mutate_all(as.character) #convert everything from a factor to prevent warnings later
 ```
 
-I want to add the age/depth information to the counts. Here I am using `bind_cols` to do this, which assumes the rows are in the same order. The paranoid might want to convert the row names of the counts into a column (`rownames_to_column`) and then join on sample.id. Next I use `pivot_longer` (the replacement of `tidyr::gather`) to convert the data from an species x samples data.frame to a long format, and join to the taxon information. Note that some datasets have a alias column in taxon.list and you need to join by that instead.
+I want to add the age/depth information to the counts. Here I am using `bind_cols` to do this, which assumes the rows are in the same order. The paranoid might want to convert the row names of the counts into a column (`rownames_to_column`) and then join on sample.id. Next I use `pivot_longer` (the replacement of `tidyr::gather`) to convert the data from a species x samples data.frame to a long format, and join to the taxon information. Note that some datasets have an alias column in taxon.list and you need to join by that instead.
 
 ```{r joins}
 bambili <- meta %>% select(age, depth) %>% 
@@ -130,7 +130,7 @@ strat.plot(bambili_spp, yvar = bambili2$depth)
 
 There are a variety of aspects of this plot that need improving. We need to:
 
-- need to plot on constant scale for all taxa
+- plot on constant scale for all taxa
 - reverse y axis so deeper levels are lower
 - arrange the taxa in some logical order
 - rotate the species names and set the figure margins
