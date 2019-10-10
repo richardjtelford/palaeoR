@@ -269,7 +269,7 @@ Can move with
      legend.position = c(1, 0))`
  
 ## Saving plots
-```{r}
+```{r ggsave, eval = FALSE}
 ggsave("myplot.png")
 ```
 Works out what format to use from extension
